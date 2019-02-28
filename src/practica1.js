@@ -37,6 +37,8 @@ MemoryGame = function(gs) {
 
 
 	this.onClick = function(CardId){
+		console.log(this.first + "  " + this.second);
+		if((this.first!=-1) && (this.second!=-1)) return;
 		if(this.first==-1){
 			if(!game.maze[CardId].find){
 				this.first = CardId;
@@ -55,9 +57,9 @@ MemoryGame = function(gs) {
 						}
 					}else{
 						game.maze[CardId].flip();
-						setTimeout(game.maze[this.first].flip(),1000);
-						setTimeout(game.maze[CardId].flip(),1000);
-						this.first = -1;
+						this.second = CardId;
+						setTimeout(function(){game.maze[game.first].flip(); game.first = -1;},1000);
+						setTimeout(function(){game.maze[game.second].flip(); game.second = -1;},1000);
 					}
 				}
 			}
